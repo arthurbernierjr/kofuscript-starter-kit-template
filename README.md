@@ -1,5 +1,5 @@
-# Big Poppa Code React Starter Kit
-This Starter Kit is being created for New Web Developers that want to get started with react
+# KofuScript Starter Kit
+This Starter Kit is being created for New Web Developers that want to get started with KofuScript
 
 Most people use a CLI Tool like Vue-Cli or Create React App and no idea what these things are doing
 
@@ -48,6 +48,11 @@ yarn dev
 npm run proxy
 ```
 
+**Build KofuScript Files**
+```bash
+npm run kofu
+```
+
 **Build files for production**
 ```bash
 yarn build
@@ -66,3 +71,10 @@ npm start
 ```bash
 yarn start
 ```
+
+
+## Process
+1. Your KofuScript Files Live in src/controllers
+1. Your Pre-Bundled JS Files Live in src/components
+1. As you write in your .kofu files you will automatically compile your .Kofu files into js files in your components
+1. Todo an Imports.kofu file and Config.Kofu to instruct webpack how to require components
