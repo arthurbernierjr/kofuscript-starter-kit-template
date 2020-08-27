@@ -1,6 +1,7 @@
+_ = require "underscore"
 app = document.getElementById "app"
 
-num :: Int = 88
+num :: Int = 89990
 present num
 
 name =
@@ -8,7 +9,7 @@ name =
   update: (newName)->
     @value = newName
     @render()
-  render: -> app.innerHTML = """<h1 onclick="promptForName()">You whack from #{@value}</h1> """
+  render: -> app.innerHTML = """<h1 onclick="promptForName()">You so rock from #{@value}</h1> """
 
 
 window.promptForName = (e)->
