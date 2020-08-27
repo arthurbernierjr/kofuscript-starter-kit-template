@@ -1,0 +1,18 @@
+app = document.getElementById "app"
+
+num :: Int = 88
+present num
+
+name =
+  value: 'arthur'
+  update: (newName)->
+    @value = newName
+    @render()
+  render: -> app.innerHTML = """<h1 onclick="promptForName()">You whack from #{@value}</h1> """
+
+
+window.promptForName = (e)->
+  newName = window.prompt "Lets Change Your Name"
+  name.update newName
+
+name.render()
