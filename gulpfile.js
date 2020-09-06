@@ -31,7 +31,7 @@ gulp.task('default', (cb) => {
 		notify: true,
 		open: true //change this to true if you want the broser to open automatically
 	});
-	exec('npm run kofu', function(err, stdout, stderr) {
+	exec('npm run main', function(err, stdout, stderr) {
 		console.log(stdout);
 		console.log(stderr);
 		cb(err);
@@ -42,8 +42,11 @@ gulp.task('default', (cb) => {
 		cb(err);
 	});
 	gulp.watch('./src/scss/**/*',  gulp.task('styles'));
-	gulp.watch('./src/components/**/*', gulp.task('webpack'));
-	gulp.watch('./src/controllers/*', gulp.task('kofu'))
+	gulp.watch('./lib/components/**/*', gulp.task('webpack'));
+	gulp.watch('./src/components/*', gulp.task('main'));
+	gulp.watch('./src/components/collections/*', gulp.task('collections'));
+	gulp.watch('./src/components/models/*', gulp.task('models'));
+	gulp.watch('./src/components/views/*', gulp.task('views'));
 	gulp
 		.watch([
 			'./public/**/*',
@@ -54,10 +57,10 @@ gulp.task('default', (cb) => {
 		.on('change', reload);
 		cb()
 });
-
-gulp.task('kofu', (cb)=> {
+/*Models */
+gulp.task('models', (cb)=> {
 	gulp
-		.src('src/controllers/**/*.kofu')
+		.src('src/components/**/*.kofu')
 		.pipe(
 			kofu({
 				jsAst: {
@@ -74,7 +77,79 @@ gulp.task('kofu', (cb)=> {
 				console.log(e)
 			})
 		)
-		.pipe(gulp.dest('./src/components'))
+		.pipe(gulp.dest('./lib/components/models'))
+		.pipe(browserSync.stream());
+		cb();
+})
+/*Collections */
+gulp.task('collections', (cb)=> {
+	gulp
+		.src('src/components/**/*.kofu')
+		.pipe(
+			kofu({
+				jsAst: {
+					bare: true,
+					header: true
+				},
+				csAst: {
+					bare: true
+				},
+				js: {
+				header: true
+				}
+			}).on('error', (e)=>{
+				console.log(e)
+			})
+		)
+		.pipe(gulp.dest('./lib/components/collections'))
+		.pipe(browserSync.stream());
+		cb();
+})
+/* Views */
+gulp.task('views', (cb)=> {
+	gulp
+		.src('src/components/**/*.kofu')
+		.pipe(
+			kofu({
+				jsAst: {
+					bare: true,
+					header: true
+				},
+				csAst: {
+					bare: true
+				},
+				js: {
+				header: true
+				}
+			}).on('error', (e)=>{
+				console.log(e)
+			})
+		)
+		.pipe(gulp.dest('./lib/components/views'))
+		.pipe(browserSync.stream());
+		cb();
+})
+/*Main */
+gulp.task('main', (cb)=> {
+	gulp
+		.src('src/components/**/*.kofu')
+		.pipe(
+			kofu({
+				jsAst: {
+					bare: true,
+					header: true
+				},
+				csAst: {
+					bare: true
+				},
+				js: {
+				header: true
+				}
+			}).on('error', (e)=>{
+				console.log(e)
+			})
+		)
+		.pipe(gulp.dest('./lib/components'))
 		.pipe(browserSync.stream());
 		cb();
 })

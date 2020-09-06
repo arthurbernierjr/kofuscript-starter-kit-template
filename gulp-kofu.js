@@ -6,7 +6,7 @@ through = require('through2');
 cache$ = require('gulp-util');
 PluginError = cache$.PluginError;
 replaceExtension = cache$.replaceExtension;
-KofuScript = require('../KofuScript');
+KofuScript = require('kofuscript');
 PLUGIN_NAME = 'gulp-kofu';
 module.exports = function (opts) {
   return through.obj(function (file, enc, callback) {

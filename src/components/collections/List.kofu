@@ -1,0 +1,7 @@
+Item = require "../models/Item"
+
+class List extends Backbone.Collection
+
+  model: Item
+
+module.exports= List

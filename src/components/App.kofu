@@ -1,0 +1,43 @@
+Item = require "./models/Item"
+List = require "./collections/List"
+ItemView = require "./views/ItemView"
+
+class ListView extends Backbone.View
+
+    el: $ '#app'
+
+
+    initialize: ->
+      _.bindAll @
+
+      @collection = new List
+      @collection.bind 'add', @appendItem
+
+      @counter = 0
+      @render()
+
+    render: ->
+      @el.append '<button id="trigger">Add List Item</button>'
+      @el.append '<h1 class="title">KofuScript With Backbone</h1><ul id="list"></ul>'
+
+    addItem: ->
+      @counter++
+
+      item = new Item
+
+      item.set part2: "#{item.get 'part2'} #{@counter}"
+
+      @collection.add item
+
+
+    appendItem: (item) ->
+      item_view = new ItemView model: item
+      $('#list').append item_view.render().el
+
+    events: 'click #trigger': 'addItem'
+
+Backbone.sync = (method, model, success, error) ->
+
+  success()
+
+list_view = new ListView

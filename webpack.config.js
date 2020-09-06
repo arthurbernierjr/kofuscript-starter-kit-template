@@ -8,8 +8,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 module.exports = env => {
 	return {
 		entry: {
-			App: './src/components/App.js',
-			main: './src/main.js'
+			main: './lib/components/App.js'
 		},
 		output: {
 			path: path.resolve(__dirname, 'public/js/dist'),

@@ -12,7 +12,7 @@
     "dev:webpack": "webpack --mode development --env.NODE_ENV=dev",
     "build:webpack": "webpack --mode production --env.NODE_ENV=production",
     "dev": "gulp",
-    "kofu": "gulp kofu",
+    "main": "gulp main",
     "proxy": "gulp watch-proxy",
     "start": "node server.js"
   },
