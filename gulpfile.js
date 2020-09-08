@@ -1,4 +1,18 @@
+/* This is the brainchild of the application */
 
+// By Running npm run dev or yarn dev you will
+/*
+* Start The Dev Server
+* Compile all KofuScript Files to the Lib Folder
+* Compile the lib folder to a bundle
+* Compile all SCSS to CSS
+* Set up automatic file watchers for hot reload
+*/
+
+/* The Lib Folder Step is only in place so that you can see the JS Files that
+ are generated from KofuScript in order to allow us the ability to see if our
+  KofuScript input gave us the desired output....
+*/
 // Explanation for Students ---- This is requires the gulp package from node modules
 // Gulp exports an object with many methods
 // task , watch, src and pipe will be the main ones we use today but see the gulp docs to expand and also see how you might refactor it to no longer use task and maybe use exports, series and parallells
@@ -26,24 +40,19 @@ const kofu = require('./gulp-kofu')
 // Explanation for Students ---- This is the brain child for our self made development server
 
 gulp.task('default', (cb) => {
-	browserSync.init({
-		server: './public',
-		notify: true,
-		open: true //change this to true if you want the broser to open automatically
-	});
 	exec('npm run main', function(err, stdout, stderr) {
 		console.log(stdout);
 		console.log(stderr);
-		cb(err);
-	});
-	exec('npm run dev:webpack', function(err, stdout, stderr) {
-		console.log(stdout);
-		console.log(stderr);
+		browserSync.init({
+			server: './public',
+			notify: true,
+			open: true //change this to true if you want the broser to open automatically
+		});
 		cb(err);
 	});
 	gulp.watch('./src/scss/**/*',  gulp.task('styles'));
 	gulp.watch('./lib/components/**/*', gulp.task('webpack'));
-	gulp.watch('./src/components/App.kofu', gulp.task('main'));
+	gulp.watch('./src/components/App.kofu', gulp.task('app'));
 	gulp.watch('./src/components/collections/*', gulp.task('collections'));
 	gulp.watch('./src/components/models/*', gulp.task('models'));
 	gulp.watch('./src/components/views/*', gulp.task('views'));
@@ -57,6 +66,7 @@ gulp.task('default', (cb) => {
 		.on('change', reload);
 		cb()
 });
+
 /*Models */
 gulp.task('models', (cb)=> {
 	gulp
@@ -129,8 +139,8 @@ gulp.task('views', (cb)=> {
 		.pipe(browserSync.stream());
 		cb();
 })
-/*Main */
-gulp.task('main', (cb)=> {
+/*App*/
+gulp.task('app', (cb)=> {
 	gulp
 		.src('src/components/App.kofu')
 		.pipe(
@@ -154,24 +164,7 @@ gulp.task('main', (cb)=> {
 		cb();
 })
 
-// This is to watch your files if you still have your server running
-gulp.task('watch-proxy', (cb) => {
-	gulp.watch('./src/scss/**/*',  gulp.task('styles'));
-	gulp.watch('./src/components/**/*', gulp.task('webpack'));
-	gulp.watch('./src/main.js',gulp.task('webpack'))
-	gulp
-		.watch([
-			'./public/**/*',
-			'./public/*',
-			'!public/js/**/.#*js',
-			'!public/css/**/.#*css'
-		])
-		.on('change', reload);
-		cb()
-});
-
-
-// Explanation for Students ---- This is compiles our styles
+// Styles ---- This is compiles our SCSS Files
 gulp.task('styles', (cb) => {
 	gulp
 		.src('src/scss/**/*.scss')
@@ -190,35 +183,7 @@ gulp.task('styles', (cb) => {
 		cb()
 });
 
-
-// Explanation for Students ---- This is for if you just want to see whats in your public folder
-
-gulp.task('browser-sync', function(cb) {
-	browserSync.init({
-		server: './public',
-		notify: false,
-		open: false //change this to true if you want the broser to open automatically
-	});
-	cb()
-});
-
-
-// Explanation for Students ---- This is for if you want run 2 servers
-gulp.task('browser-sync-proxy', function(cb) {
-	// THIS IS FOR SITUATIONS WHEN YOU HAVE ANOTHER SERVER RUNNING
-	browserSync.init({
-		proxy: {
-			target: 'http://localhost:3333/', // can be [virtual host, sub-directory, localhost with port]
-			ws: true // enables websockets
-		}
-		// serveStatic: ['.', './public']
-	});
-	cb()
-});
-
-
-
-// Explanation for Students ---- This is for the development build
+// Webpack ---- This is for the development build
 gulp.task('webpack', cb => {
 	exec('npm run dev:webpack', function(err, stdout, stderr) {
 		console.log(stdout);
@@ -227,7 +192,7 @@ gulp.task('webpack', cb => {
 	});
 });
 
-// Explanation for Students ---- This is for the production build
+// Build ---- This is for the production build
 gulp.task('build', cb => {
 	exec('npm run build:webpack', function(err, stdout, stderr) {
 		console.log(stdout);
@@ -235,3 +200,5 @@ gulp.task('build', cb => {
 		cb(err);
 	});
 });
+// This is for the startup sequence
+exports.main = gulp.series('collections', 'models', 'views', 'app', 'webpack');
