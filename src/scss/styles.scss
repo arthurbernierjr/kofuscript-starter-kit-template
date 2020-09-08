@@ -1,7 +1,50 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700");
 @import "reset";
 
+$include-column-box-sizing: true !default;
 
+// Configuration
+@import "bootstrap/functions";
+@import "bootstrap/variables";
+@import "bootstrap/mixins";
+@import "bootstrap/utilities";
+
+// Layout & components
+@import "bootstrap/root";
+@import "bootstrap/reboot";
+@import "bootstrap/type";
+@import "bootstrap/images";
+@import "bootstrap/containers";
+@import "bootstrap/grid";
+@import "bootstrap/tables";
+@import "bootstrap/forms";
+@import "bootstrap/buttons";
+@import "bootstrap/transitions";
+@import "bootstrap/dropdown";
+@import "bootstrap/button-group";
+@import "bootstrap/nav";
+@import "bootstrap/navbar";
+@import "bootstrap/card";
+@import "bootstrap/breadcrumb";
+@import "bootstrap/pagination";
+@import "bootstrap/badge";
+@import "bootstrap/alert";
+@import "bootstrap/progress";
+@import "bootstrap/list-group";
+@import "bootstrap/close";
+@import "bootstrap/toasts";
+@import "bootstrap/modal";
+@import "bootstrap/tooltip";
+@import "bootstrap/popover";
+@import "bootstrap/carousel";
+@import "bootstrap/spinners";
+
+// Helpers
+@import "bootstrap/helpers";
+
+// Utilities
+@import "bootstrap/utilities/api";
+// scss-docs-end import-stack
 
 body {
   line-height: 1;
@@ -39,116 +82,19 @@ body {
 h1 {
   font-weight: 100;
   font-size: 50px;
-  text-align: center;
-  margin-bottom: 1rem;
 }
 
-#list {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  li {
-    margin-bottom: .5rem;
+button{
+  margin: 0.2rem auto;
+  background-color: #fEfE95;
+  height: 3rem;
+  font-size: 1rem;
+  box-shadow: 0 4px 8px rgba(#8E6E95, 0.2);
+  &:hover, &:active, &:focus {
+    cursor: pointer;
+    box-shadow: 0 8px 16px rgba(#8E6E95, 0.9);
   }
-}
-
-.home {
-  height: 100%;
-  width: 100%;
-  text-align: center;
-  .Aligner {
-    min-height: 85vh;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-align: center;
-    align-items: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-  }
-  .Aligner-2 {
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-align: center;
-    align-items: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-  }
-  img {
-    width: 100%;
-    max-width: 300px;
-    margin: 0 auto;
-  }
-  .Aligner-item {
-    max-width: 50%;
-  }
-  .menu ul li {
-    padding: 10px 15px;
-    display: inline-block;
-    font-family: 'Roboto', sans-serif;
-    font-size: 18px;
-    font-weight: 500;
-  }
-  .version-num {
-    background: #E8E8E8;
-    border-radius: 4px;
-    padding: 7px 15px;
-    display: inline-block;
-    font-size: 12px;
-    margin: 10px 0 20px;
-  }
-  a {
-    text-decoration: none;
-    color: #30395C;
-    transition: all 0.3s ease-in-out;
-  }
-  a:hover {
-    color: #43D4D6;
-  }
-}
-.Page-wrapper{
-  display: flex;
-  width: 100vw;
-  flex-direction: column;
-  align-items: center;
-  .Page {
-    display: flex;
-    justify-content: space-around;
-    width: calc(100vw - 50px);
-    .column {
-      width: 100%;
-      margin-left: 25px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      .heading{
-        height: 30px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: white;
-        border: 0.1px solid transparentize(black, .35);
-        width: 100%;
-      }
-    }
-  }
-  .winnie{
-    background-color: #8E6E95;
-  }
-  .bob{
-    background-color: #39A59C;
-  }
-  .thomas{
-    background-color: #344759;
-  }
-  .george{
-    background-color: #E8741E;
-  }
-  button{
-    margin: 3rem auto 0.5rem;
-    background-color: #fEfE95;
-    width: 65%;
-    height: 3rem;
-    font-size: 2rem;
-    box-shadow: 0 4px 8px rgba(#8E6E95, 0.2);
+  &:active {
+    box-shadow: 0 16px 32px rgba(#8E6E95, 0.9);
   }
 }

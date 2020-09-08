@@ -43,7 +43,7 @@ gulp.task('default', (cb) => {
 	});
 	gulp.watch('./src/scss/**/*',  gulp.task('styles'));
 	gulp.watch('./lib/components/**/*', gulp.task('webpack'));
-	gulp.watch('./src/components/*', gulp.task('main'));
+	gulp.watch('./src/components/App.kofu', gulp.task('main'));
 	gulp.watch('./src/components/collections/*', gulp.task('collections'));
 	gulp.watch('./src/components/models/*', gulp.task('models'));
 	gulp.watch('./src/components/views/*', gulp.task('views'));
@@ -60,7 +60,7 @@ gulp.task('default', (cb) => {
 /*Models */
 gulp.task('models', (cb)=> {
 	gulp
-		.src('src/components/**/*.kofu')
+		.src('src/components/models/**/*.kofu')
 		.pipe(
 			kofu({
 				jsAst: {
@@ -84,7 +84,7 @@ gulp.task('models', (cb)=> {
 /*Collections */
 gulp.task('collections', (cb)=> {
 	gulp
-		.src('src/components/**/*.kofu')
+		.src('src/components/collections/**/*.kofu')
 		.pipe(
 			kofu({
 				jsAst: {
@@ -108,7 +108,7 @@ gulp.task('collections', (cb)=> {
 /* Views */
 gulp.task('views', (cb)=> {
 	gulp
-		.src('src/components/**/*.kofu')
+		.src('src/components/views/**/*.kofu')
 		.pipe(
 			kofu({
 				jsAst: {
@@ -132,7 +132,7 @@ gulp.task('views', (cb)=> {
 /*Main */
 gulp.task('main', (cb)=> {
 	gulp
-		.src('src/components/**/*.kofu')
+		.src('src/components/App.kofu')
 		.pipe(
 			kofu({
 				jsAst: {
